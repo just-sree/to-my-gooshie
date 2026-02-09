@@ -143,12 +143,13 @@ for (const btn of document.querySelectorAll('.q-btn')) {
       }
       feedback.textContent = '✅ Unlocked, smart girl 💡';
     } else if (puzzleType === 'date') {
-      const v = (document.getElementById('puzzleDate')?.value || '').trim();
-      if (v !== '14-02-2026') {
-        feedback.textContent = '❌ Try again. Hint: Valentine date';
+      const v = (document.getElementById('puzzleDate')?.value || '').trim().toLowerCase();
+      const ok = ['march 14th', 'march 14', '14 march', '14th march'];
+      if (!ok.includes(v)) {
+        feedback.textContent = '❌ Hehe nooo. Hint: month starts with M 😌';
         return;
       }
-      feedback.textContent = '✅ Date lock opened 💘';
+      feedback.textContent = '✅ Yesss, anniversary queen 💘';
     } else {
       group.querySelectorAll('.q-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
