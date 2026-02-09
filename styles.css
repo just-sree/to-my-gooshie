@@ -93,6 +93,21 @@ button {
   border: 1px solid rgba(255,255,255,0.24);
 }
 .hint { opacity: .85; margin-top: 16px; }
+.memory {
+  margin-top: 18px;
+  text-align: left;
+}
+.memory h2 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+}
+.memory-collage {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 8px 26px rgba(0,0,0,0.25);
+}
+
 #confetti {
   position: fixed;
   inset: 0;
