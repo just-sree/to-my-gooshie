@@ -133,7 +133,13 @@ for (const btn of document.querySelectorAll('.q-btn')) {
 
     group.querySelectorAll('.q-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
-    feedback.textContent = `✅ Perfect answer, ${cap(randomPet())} 💞`;
+    const feedbackLines = [
+      `✅ Aww yes, my ${cap(randomPet())} 💞`,
+      `✅ Perfect choice, my ${cap(randomPet())} 😚`,
+      `✅ You always pick the cutest answer 🧡`,
+      `✅ That’s exactly why I adore you ✨`
+    ];
+    feedback.textContent = feedbackLines[Math.floor(Math.random() * feedbackLines.length)];
     cardEl.dataset.locked = 'true';
 
     group.querySelectorAll('.q-btn').forEach(b => {
