@@ -124,6 +124,8 @@ button {
 .q-stack {
   position: relative;
   min-height: 420px;
+  overflow: hidden;
+  border-radius: 14px;
 }
 @media (max-width: 480px) {
   .q-stack { min-height: 320px; }
@@ -139,6 +141,7 @@ button {
   pointer-events: none;
   transform: translateY(18px) scale(0.98);
   transition: transform .35s ease, opacity .35s ease;
+  overflow: auto;
 }
 .q-card.swipe-out {
   transform: translateX(-34px) translateY(-8px) rotate(-2deg);
