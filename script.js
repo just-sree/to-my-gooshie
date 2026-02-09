@@ -198,7 +198,7 @@ function typeWriter(el, text, speed = 36) {
 function showFinalCard() {
   qStack.classList.add('hidden');
   resultCard.classList.remove('hidden');
-  typeWriter(resultTitle, 'Best Girlfriend Ever 💖', 42);
+  typeWriter(resultTitle, 'Yaay! Best Girlfriend Ever 💖', 42);
   setTimeout(() => typeWriter(resultSub, `I love you always — my ${cap(randomPet())} 😚`, 28), 420);
   launchConfetti();
   setTimeout(() => launchConfetti(['#ffd166', '#fff0c2', '#ff9ec4', '#b8f2ff'], 130), 280);
