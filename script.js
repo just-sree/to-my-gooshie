@@ -110,7 +110,10 @@ function updateStack() {
 
   const active = qCards[currentStep];
   if (active) {
-    qStack.style.minHeight = `${Math.max(420, active.offsetHeight + 26)}px`;
+    const isMobile = window.innerWidth <= 480;
+    const baseMin = isMobile ? 320 : 380;
+    const pad = isMobile ? 12 : 22;
+    qStack.style.minHeight = `${Math.max(baseMin, active.offsetHeight + pad)}px`;
     const img = active.querySelector('.q-img');
     if (img) enableParallax(img);
   }
