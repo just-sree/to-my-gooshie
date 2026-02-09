@@ -183,6 +183,16 @@ button {
 }
 .q-text { margin: 0 0 8px; font-weight: 800; }
 .q-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.puzzle-input {
+  width: 100%;
+  margin: 6px 0 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,179,71,0.45);
+  background: rgba(10,14,22,0.8);
+  color: #fff;
+  font-size: 1rem;
+}
 .q-btn {
   background: rgba(255,179,71,0.18);
   color: #ffe8c8;

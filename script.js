@@ -134,15 +134,33 @@ for (const btn of document.querySelectorAll('.q-btn')) {
     const group = btn.closest('.q-actions');
     const feedback = cardEl.querySelector('.q-feedback');
 
-    group.querySelectorAll('.q-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    const feedbackLines = [
-      `✅ Aww yes, my ${cap(randomPet())} 💞`,
-      `✅ Perfect choice, my ${cap(randomPet())} 😚`,
-      `✅ You always pick the cutest answer 🧡`,
-      `✅ That’s exactly why I adore you ✨`
-    ];
-    feedback.textContent = feedbackLines[Math.floor(Math.random() * feedbackLines.length)];
+    const puzzleType = btn.dataset.puzzleCheck;
+    if (puzzleType === 'name') {
+      const v = (document.getElementById('puzzleName')?.value || '').trim().toLowerCase();
+      if (v !== 'gooshie') {
+        feedback.textContent = '❌ Close! Hint: it starts with G';
+        return;
+      }
+      feedback.textContent = '✅ Unlocked, smart girl 💡';
+    } else if (puzzleType === 'date') {
+      const v = (document.getElementById('puzzleDate')?.value || '').trim();
+      if (v !== '14-02-2026') {
+        feedback.textContent = '❌ Try again. Hint: Valentine date';
+        return;
+      }
+      feedback.textContent = '✅ Date lock opened 💘';
+    } else {
+      group.querySelectorAll('.q-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const feedbackLines = [
+        `✅ Aww yes, my ${cap(randomPet())} 💞`,
+        `✅ Perfect choice, my ${cap(randomPet())} 😚`,
+        `✅ You always pick the cutest answer 🧡`,
+        `✅ That’s exactly why I adore you ✨`
+      ];
+      feedback.textContent = feedbackLines[Math.floor(Math.random() * feedbackLines.length)];
+    }
+
     cardEl.dataset.locked = 'true';
 
     group.querySelectorAll('.q-btn').forEach(b => {
