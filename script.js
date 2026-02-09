@@ -14,6 +14,28 @@ const qCards = Array.from(document.querySelectorAll('.q-card'));
 let noClicks = 0;
 let currentStep = 0;
 
+const petNames = ['cutu', 'bubba', 'sweetu', 'gooshie'];
+
+function cap(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+function randomPet(exclude = []) {
+  const pool = petNames.filter((p) => !exclude.includes(p));
+  return pool[Math.floor(Math.random() * pool.length)] || petNames[0];
+}
+
+function applyRandomPetNames() {
+  const used = [];
+  ['pet1', 'pet2', 'pet3', 'pet4', 'pet5', 'pet6'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const pick = randomPet(used.length < petNames.length ? used : []);
+    if (used.length < petNames.length) used.push(pick);
+    el.textContent = cap(pick);
+  });
+}
+
 noBtn.addEventListener('click', dodgeNo);
 noBtn.addEventListener('touchstart', dodgeNo, { passive: true });
 
@@ -43,6 +65,8 @@ yesBtn.addEventListener('click', () => {
   launchConfetti();
 });
 
+applyRandomPetNames();
+
 function updateStack() {
   qCards.forEach((cardEl, idx) => {
     cardEl.classList.remove('active', 'next', 'queued');
@@ -70,7 +94,7 @@ for (const btn of document.querySelectorAll('.q-btn')) {
 
     group.querySelectorAll('.q-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
-    feedback.textContent = '✅ Perfect answer, Cutu/Bubba/Sweetu/Gooshie 💞';
+    feedback.textContent = `✅ Perfect answer, ${cap(randomPet())} 💞`;
     cardEl.dataset.locked = 'true';
 
     group.querySelectorAll('.q-btn').forEach(b => {
@@ -109,7 +133,7 @@ function showFinalCard() {
   qStack.classList.add('hidden');
   resultCard.classList.remove('hidden');
   typeWriter(resultTitle, 'Best Girlfriend Ever 💖', 42);
-  setTimeout(() => typeWriter(resultSub, 'I love you always — my Cutu, Bubba, Sweetu, and Gooshie 😚', 28), 420);
+  setTimeout(() => typeWriter(resultSub, `I love you always — my ${cap(randomPet())} 😚`, 28), 420);
   launchConfetti();
 }
 
@@ -134,6 +158,7 @@ function resetQuestionnaire() {
 replayBtn.addEventListener('click', () => {
   currentStep = 0;
   resetQuestionnaire();
+  applyRandomPetNames();
   updateStack();
   questionnaire.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
