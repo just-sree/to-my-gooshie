@@ -3,37 +3,59 @@ const noBtn = document.getElementById('noBtn');
 const musicBtn = document.getElementById('musicBtn');
 const hint = document.getElementById('hint');
 const card = document.getElementById('card');
+const questionnaire = document.getElementById('questionnaire');
+const finalYes = document.getElementById('finalYes');
+const finalYes2 = document.getElementById('finalYes2');
 
 let noClicks = 0;
 
-noBtn.addEventListener('mouseenter', dodgeNo);
+// Mobile-safe dodge: only on tap/click, and constrained movement
 noBtn.addEventListener('click', dodgeNo);
+noBtn.addEventListener('touchstart', dodgeNo, { passive: true });
 
 function dodgeNo() {
   noClicks++;
   const messages = [
-    "Are you sure? 🥺",
-    "Think again 😏",
-    "That button is shy today 👀",
-    "Come on, say yes 💕",
-    "This is our special moment 🍥"
+    'Are you sure? 🥺',
+    'Think again 😏',
+    'That button is shy today 👀',
+    'Come on, say yes 💕',
+    'This is our special moment 🍥'
   ];
   hint.textContent = messages[Math.min(noClicks - 1, messages.length - 1)];
 
-  const x = Math.random() * 220 - 110;
-  const y = Math.random() * 120 - 60;
+  const maxX = 70;
+  const maxY = 28;
+  const x = Math.random() * (maxX * 2) - maxX;
+  const y = Math.random() * (maxY * 2) - maxY;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
 yesBtn.addEventListener('click', () => {
-  card.innerHTML = `
-    <p class="tag">To my silliest gooshie</p>
-    <h1>Best Girlfriend Ever 💖</h1>
-    <p class="sub">Officially locked in for Valentine’s 💘</p>
-    <p class="hint">I love you always, Gooshie 😚</p>
-  `;
+  card.classList.add('hidden');
+  questionnaire.classList.remove('hidden');
+  questionnaire.scrollIntoView({ behavior: 'smooth', block: 'start' });
   launchConfetti();
 });
+
+// Questionnaire card interactions
+for (const btn of document.querySelectorAll('.q-btn')) {
+  btn.addEventListener('click', () => {
+    const group = btn.closest('.q-actions');
+    group.querySelectorAll('.q-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  });
+}
+
+function finishFlow() {
+  launchConfetti();
+  questionnaire.innerHTML = `
+    <h2>Best Girlfriend Ever 💖</h2>
+    <p class="q-sub">I love you always, Gooshie 😚</p>
+  `;
+}
+finalYes.addEventListener('click', finishFlow);
+finalYes2.addEventListener('click', finishFlow);
 
 let audioCtx;
 let musicTimer;
@@ -55,7 +77,6 @@ function playNote(freq, duration = 0.35, gainVal = 0.04) {
 
 function startMusic() {
   if (musicOn) return;
-  // Naruto-inspired soft motif (original synth approximation)
   const progression = [293.66, 349.23, 392.0, 440.0, 392.0, 349.23, 293.66, 261.63];
   let i = 0;
   musicTimer = setInterval(() => {
@@ -77,7 +98,6 @@ musicBtn.addEventListener('click', () => {
   else startMusic();
 });
 
-// Keep music ON by default (best effort; mobile browsers may require first tap)
 window.addEventListener('load', () => {
   try { startMusic(); } catch (e) {}
 });
@@ -104,7 +124,7 @@ function launchConfetti() {
     y: -20 - Math.random() * canvas.height * 0.4,
     r: 2 + Math.random() * 4,
     v: 1 + Math.random() * 3,
-    c: ['#ff8a00', '#ffb347', '#6ee7ff', '#ff6b81'][Math.floor(Math.random()*4)],
+    c: ['#ff8a00', '#ffb347', '#6ee7ff', '#ff6b81'][Math.floor(Math.random() * 4)],
     a: Math.random() * Math.PI * 2
   }));
   requestAnimationFrame(tick);

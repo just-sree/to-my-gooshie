@@ -35,6 +35,7 @@ body {
   box-shadow: 0 20px 50px rgba(0,0,0,0.45);
   z-index: 2;
 }
+.hidden { display: none; }
 .title-card { text-align: center; }
 .tag { margin: 0; opacity: 0.9; letter-spacing: .04em; font-weight: 800; }
 h1 {
@@ -46,6 +47,7 @@ h1 {
 .naruto-line { margin: 0 0 8px; color: #ffd7a3; font-weight: 700; }
 .gooshie { margin: 0 0 12px; color: #ffcf8b; font-weight: 900; letter-spacing: .02em; }
 .date { margin: 0 0 14px; opacity: .88; font-weight: 700; color: #ffe1bb; }
+.tap-note { margin: 10px 0 0; opacity: .7; font-size: .9rem; }
 
 .btns {
   display: flex;
@@ -71,6 +73,7 @@ button {
 .no {
   background: rgba(123,16,34,0.45);
   color: #fff2f2;
+  transition: transform .15s ease;
 }
 .music {
   background: rgba(255,179,71,0.16);
@@ -94,8 +97,23 @@ button {
   border: 1px solid rgba(255,255,255,0.22);
   margin-bottom: 8px;
 }
-.q-text { margin: 0 0 4px; font-weight: 800; }
-.q-answer { margin: 0; color: #ffd9ab; }
+.q-text { margin: 0 0 8px; font-weight: 800; }
+.q-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.q-btn {
+  background: rgba(255,179,71,0.18);
+  color: #ffe8c8;
+  border: 1px solid rgba(255,179,71,0.4);
+  padding: 10px 14px;
+  font-size: .95rem;
+}
+.q-btn.selected {
+  background: linear-gradient(135deg, var(--orange), var(--amber));
+  color: #2a1200;
+}
+.q-btn.final {
+  background: linear-gradient(135deg, var(--orange), var(--amber));
+  color: #2a1200;
+}
 
 #confetti {
   position: fixed;
