@@ -17,6 +17,7 @@ const ambientHearts = document.getElementById('ambientHearts');
 
 let noClicks = 0;
 let currentStep = 0;
+let lastDodgeAt = 0;
 
 const petNames = ['cutu', 'bubba', 'sweetu', 'gooshie'];
 
@@ -70,6 +71,23 @@ function enableParallax(img) {
 
 noBtn.addEventListener('click', dodgeNo);
 noBtn.addEventListener('touchstart', dodgeNo, { passive: true });
+
+document.addEventListener('mousemove', (e) => {
+  if (card.classList.contains('hidden')) return;
+  const rect = noBtn.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+
+  // Start dodging when cursor gets close (before click)
+  if (dist < 130) {
+    const now = Date.now();
+    if (now - lastDodgeAt > 220) {
+      lastDodgeAt = now;
+      dodgeNo();
+    }
+  }
+});
 
 function dodgeNo() {
   noClicks++;
