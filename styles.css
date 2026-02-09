@@ -110,9 +110,18 @@ button {
   background: linear-gradient(135deg, var(--orange), var(--amber));
   color: #2a1200;
 }
+.q-btn.locked {
+  opacity: .75;
+}
 .q-btn.final {
   background: linear-gradient(135deg, var(--orange), var(--amber));
   color: #2a1200;
+}
+.q-feedback {
+  margin: 8px 0 0;
+  min-height: 22px;
+  color: #ffd6a1;
+  font-weight: 700;
 }
 
 #confetti {

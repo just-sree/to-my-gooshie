@@ -38,12 +38,27 @@ yesBtn.addEventListener('click', () => {
   launchConfetti();
 });
 
-// Questionnaire card interactions
+// Questionnaire card interactions (select + feedback + lock card)
 for (const btn of document.querySelectorAll('.q-btn')) {
   btn.addEventListener('click', () => {
+    const cardEl = btn.closest('.q-card');
     const group = btn.closest('.q-actions');
+    const feedback = cardEl.querySelector('.q-feedback');
+
+    if (cardEl.dataset.locked === 'true') return;
+
     group.querySelectorAll('.q-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
+
+    feedback.textContent = '✅ Perfect answer, Gooshie.';
+    cardEl.dataset.locked = 'true';
+
+    group.querySelectorAll('.q-btn').forEach(b => {
+      if (b !== btn) {
+        b.classList.add('locked');
+        b.disabled = true;
+      }
+    });
   });
 }
 
