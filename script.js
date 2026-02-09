@@ -30,7 +30,7 @@ yesBtn.addEventListener('click', () => {
     <p class="tag">To my silliest gooshie</p>
     <h1>Best. Decision. Ever.</h1>
     <p class="sub">Officially locked in for Valentine’s 💘</p>
-    <p class="hint">Mannat said yes. I love you always, Gooshie 😚</p>
+    <p class="hint">I love you always, Gooshie 😚</p>
   `;
   launchConfetti();
 });
