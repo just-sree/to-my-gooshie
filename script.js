@@ -12,11 +12,11 @@ noBtn.addEventListener('click', dodgeNo);
 function dodgeNo() {
   noClicks++;
   const messages = [
-    "Mannat-chan, are you sure? 🥺",
-    "The Hidden Leaf believes in us 😏",
-    "That button got shadow-cloned 👀",
-    "C'mon, say yes dattebayo 💕",
-    "This is our canon event 🍥"
+    "Are you sure? 🥺",
+    "Think again 😏",
+    "That button is shy today 👀",
+    "Come on, say yes 💕",
+    "This is our special moment 🍥"
   ];
   hint.textContent = messages[Math.min(noClicks - 1, messages.length - 1)];
 
@@ -30,7 +30,7 @@ yesBtn.addEventListener('click', () => {
     <p class="tag">To my silliest gooshie</p>
     <h1>Best. Decision. Ever.</h1>
     <p class="sub">Officially locked in for Valentine’s 💘</p>
-    <p class="hint">Mannat said yes. I love you, Gooshie — our ninja love arc is canon now 🍥😚</p>
+    <p class="hint">Mannat said yes. I love you always, Gooshie 😚</p>
   `;
   launchConfetti();
 });
@@ -55,20 +55,21 @@ function playNote(freq, duration = 0.35, gainVal = 0.04) {
 
 function startMusic() {
   if (musicOn) return;
-  const progression = [261.63, 329.63, 392.0, 523.25, 392.0, 329.63];
+  // Naruto-inspired soft motif (original synth approximation)
+  const progression = [293.66, 349.23, 392.0, 440.0, 392.0, 349.23, 293.66, 261.63];
   let i = 0;
   musicTimer = setInterval(() => {
     playNote(progression[i % progression.length]);
     i++;
   }, 450);
   musicOn = true;
-  musicBtn.textContent = '🎵 Theme Music: On';
+  musicBtn.textContent = '🎵 Naruto Theme (soft): On';
 }
 
 function stopMusic() {
   clearInterval(musicTimer);
   musicOn = false;
-  musicBtn.textContent = '🎵 Theme Music: Off';
+  musicBtn.textContent = '🎵 Naruto Theme (soft): Off';
 }
 
 musicBtn.addEventListener('click', () => {
