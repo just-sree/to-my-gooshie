@@ -4,12 +4,13 @@ const musicBtn = document.getElementById('musicBtn');
 const hint = document.getElementById('hint');
 const card = document.getElementById('card');
 const questionnaire = document.getElementById('questionnaire');
-const finalYes = document.getElementById('finalYes');
-const finalYes2 = document.getElementById('finalYes2');
+const qStack = document.getElementById('qStack');
+const resultCard = document.getElementById('resultCard');
+const qCards = Array.from(document.querySelectorAll('.q-card'));
 
 let noClicks = 0;
+let currentStep = 0;
 
-// Mobile-safe dodge: only on tap/click, and constrained movement
 noBtn.addEventListener('click', dodgeNo);
 noBtn.addEventListener('touchstart', dodgeNo, { passive: true });
 
@@ -24,10 +25,8 @@ function dodgeNo() {
   ];
   hint.textContent = messages[Math.min(noClicks - 1, messages.length - 1)];
 
-  const maxX = 70;
-  const maxY = 28;
-  const x = Math.random() * (maxX * 2) - maxX;
-  const y = Math.random() * (maxY * 2) - maxY;
+  const x = Math.random() * 140 - 70;
+  const y = Math.random() * 56 - 28;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
@@ -35,21 +34,38 @@ yesBtn.addEventListener('click', () => {
   card.classList.add('hidden');
   questionnaire.classList.remove('hidden');
   questionnaire.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  currentStep = 0;
+  updateStack();
   launchConfetti();
 });
 
-// Questionnaire card interactions (select + feedback + lock card)
+function updateStack() {
+  qCards.forEach((cardEl, idx) => {
+    cardEl.classList.remove('active', 'next', 'queued');
+    if (idx === currentStep) cardEl.classList.add('active');
+    else if (idx === currentStep + 1) cardEl.classList.add('next');
+    else if (idx === currentStep + 2) cardEl.classList.add('queued');
+  });
+
+  const active = qCards[currentStep];
+  if (active) {
+    qStack.style.minHeight = `${Math.max(420, active.offsetHeight + 26)}px`;
+  }
+}
+
 for (const btn of document.querySelectorAll('.q-btn')) {
   btn.addEventListener('click', () => {
     const cardEl = btn.closest('.q-card');
+    const idx = Number(cardEl.dataset.step || 0);
+
+    if (idx !== currentStep) return;
+    if (cardEl.dataset.locked === 'true') return;
+
     const group = btn.closest('.q-actions');
     const feedback = cardEl.querySelector('.q-feedback');
 
-    if (cardEl.dataset.locked === 'true') return;
-
     group.querySelectorAll('.q-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
-
     feedback.textContent = '✅ Perfect answer, Gooshie.';
     cardEl.dataset.locked = 'true';
 
@@ -59,18 +75,23 @@ for (const btn of document.querySelectorAll('.q-btn')) {
         b.disabled = true;
       }
     });
+
+    if (idx === qCards.length - 1) {
+      setTimeout(showFinalCard, 550);
+    } else {
+      setTimeout(() => {
+        currentStep += 1;
+        updateStack();
+      }, 450);
+    }
   });
 }
 
-function finishFlow() {
+function showFinalCard() {
+  qStack.classList.add('hidden');
+  resultCard.classList.remove('hidden');
   launchConfetti();
-  questionnaire.innerHTML = `
-    <h2>Best Girlfriend Ever 💖</h2>
-    <p class="q-sub">I love you always, Gooshie 😚</p>
-  `;
 }
-finalYes.addEventListener('click', finishFlow);
-finalYes2.addEventListener('click', finishFlow);
 
 let audioCtx;
 let musicTimer;

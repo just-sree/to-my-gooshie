@@ -84,12 +84,37 @@ button {
 
 .questionnaire h2 { margin: 0 0 6px; text-align: center; }
 .q-sub { margin: 0 0 14px; text-align: center; opacity: .9; }
+.q-stack {
+  position: relative;
+  min-height: 520px;
+}
 .q-card {
+  position: absolute;
+  inset: 0;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,179,71,0.25);
   border-radius: 14px;
   padding: 10px;
-  margin-bottom: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(18px) scale(0.98);
+  transition: transform .35s ease, opacity .35s ease;
+}
+.q-card.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  z-index: 3;
+}
+.q-card.next {
+  opacity: .45;
+  transform: translateY(12px) scale(.98);
+  z-index: 2;
+}
+.q-card.queued {
+  opacity: .2;
+  transform: translateY(22px) scale(.96);
+  z-index: 1;
 }
 .q-img {
   width: 100%;
@@ -122,6 +147,10 @@ button {
   min-height: 22px;
   color: #ffd6a1;
   font-weight: 700;
+}
+.q-result {
+  text-align: center;
+  padding: 28px 8px 6px;
 }
 
 #confetti {

@@ -33,44 +33,51 @@
       <h2>Gooshie Questionnaire 🪿</h2>
       <p class="q-sub">Every answer leads to one thing: I love you always.</p>
 
-      <article class="q-card">
-        <img src="assets/images/memory-1.jpg" alt="Sree and Mannat memory 1" class="q-img" loading="lazy" decoding="async" />
-        <p class="q-text">Q1: Is this our cutest photo ever?</p>
-        <div class="q-actions">
-          <button class="q-btn" data-answer="yes">Yes 💞</button>
-          <button class="q-btn" data-answer="yes">Absolutely Yes ✨</button>
-        </div>
-        <p class="q-feedback" aria-live="polite"></p>
-      </article>
+      <div class="q-stack" id="qStack">
+        <article class="q-card" data-step="0">
+          <img src="assets/images/memory-1.jpg" alt="Sree and Mannat memory 1" class="q-img" loading="lazy" decoding="async" />
+          <p class="q-text">Q1: Is this our cutest photo ever?</p>
+          <div class="q-actions">
+            <button class="q-btn" data-answer="yes">Yes 💞</button>
+            <button class="q-btn" data-answer="yes">Absolutely Yes ✨</button>
+          </div>
+          <p class="q-feedback" aria-live="polite"></p>
+        </article>
 
-      <article class="q-card">
-        <img src="assets/images/memory-2.jpg" alt="Sree and Mannat memory 2" class="q-img" loading="lazy" decoding="async" />
-        <p class="q-text">Q2: Should we go on more cozy dates like this?</p>
-        <div class="q-actions">
-          <button class="q-btn" data-answer="yes">1000% Yes 🍜</button>
-          <button class="q-btn" data-answer="yes">Yes, always 🧡</button>
-        </div>
-        <p class="q-feedback" aria-live="polite"></p>
-      </article>
+        <article class="q-card" data-step="1">
+          <img src="assets/images/memory-2.jpg" alt="Sree and Mannat memory 2" class="q-img" loading="lazy" decoding="async" />
+          <p class="q-text">Q2: Should we go on more cozy dates like this?</p>
+          <div class="q-actions">
+            <button class="q-btn" data-answer="yes">1000% Yes 🍜</button>
+            <button class="q-btn" data-answer="yes">Yes, always 🧡</button>
+          </div>
+          <p class="q-feedback" aria-live="polite"></p>
+        </article>
 
-      <article class="q-card">
-        <img src="assets/images/memory-3.jpg" alt="Sree and Mannat memory 3" class="q-img" loading="lazy" decoding="async" />
-        <p class="q-text">Q3: Do I love you, Gooshie?</p>
-        <div class="q-actions">
-          <button class="q-btn" data-answer="yes">Forever yes 🧡</button>
-          <button class="q-btn" data-answer="yes">Always yes 💫</button>
-        </div>
-        <p class="q-feedback" aria-live="polite"></p>
-      </article>
+        <article class="q-card" data-step="2">
+          <img src="assets/images/memory-3.jpg" alt="Sree and Mannat memory 3" class="q-img" loading="lazy" decoding="async" />
+          <p class="q-text">Q3: Do I love you, Gooshie?</p>
+          <div class="q-actions">
+            <button class="q-btn" data-answer="yes">Forever yes 🧡</button>
+            <button class="q-btn" data-answer="yes">Always yes 💫</button>
+          </div>
+          <p class="q-feedback" aria-live="polite"></p>
+        </article>
 
-      <article class="q-card">
-        <img src="assets/images/memory-4.jpg" alt="Sree and Mannat memory 4" class="q-img" loading="lazy" decoding="async" />
-        <p class="q-text">Final Q: Will you be my Valentine, Mannat?</p>
-        <div class="q-actions">
-          <button class="q-btn final" id="finalYes">YES 💘</button>
-          <button class="q-btn final" id="finalYes2">YES YES 💖</button>
-        </div>
-        <p class="q-feedback" aria-live="polite"></p>
+        <article class="q-card" data-step="3">
+          <img src="assets/images/memory-4.jpg" alt="Sree and Mannat memory 4" class="q-img" loading="lazy" decoding="async" />
+          <p class="q-text">Final Q: Will you be my Valentine, Mannat?</p>
+          <div class="q-actions">
+            <button class="q-btn final" data-answer="yes">YES 💘</button>
+            <button class="q-btn final" data-answer="yes">YES YES 💖</button>
+          </div>
+          <p class="q-feedback" aria-live="polite"></p>
+        </article>
+      </div>
+
+      <article class="q-result hidden" id="resultCard">
+        <h2>Best Girlfriend Ever 💖</h2>
+        <p class="q-sub">I love you always, Gooshie 😚</p>
       </article>
     </section>
 
